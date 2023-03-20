@@ -22,7 +22,11 @@ CREATE TABLE [dbo].[Users]
 [FailedPasswordAnswerAttemptWindowStart] [datetime] NULL,
 [Program] [int] NULL,
 [ProgramSite] [int] NULL,
-[Role] [varchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+[Role] [varchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[isVerified] [bit] NOT NULL CONSTRAINT [DF__Users__isVerifie__47DBAE45] DEFAULT ((0)),
+[verifycode] [varchar] (128) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[verifiedDate] [datetime] NOT NULL CONSTRAINT [DF__Users__verifiedD__6E01572D] DEFAULT ('9/9/1999'),
+[isUsing2Factor] [bit] NOT NULL CONSTRAINT [DF__Users__isUsing2F__01142BA1] DEFAULT ((0))
 ) ON [PRIMARY]
 GO
 SET QUOTED_IDENTIFIER ON
@@ -52,5 +56,5 @@ BEGIN
 	EXEC spAddFormReview_userTrigger @UserName, @Rolename, @ApplicationName, @ProgramFK, @ProgramSiteFK
 END
 GO
-ALTER TABLE [dbo].[Users] ADD CONSTRAINT [PK__Users__0519C6AF] PRIMARY KEY CLUSTERED  ([PKID]) ON [PRIMARY]
+ALTER TABLE [dbo].[Users] ADD CONSTRAINT [PK__Users__0519C6AF] PRIMARY KEY CLUSTERED ([PKID]) ON [PRIMARY]
 GO
