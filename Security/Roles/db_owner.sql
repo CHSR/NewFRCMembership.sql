@@ -1,2 +1,4 @@
-EXEC sp_addrolemember N'db_owner', N'UALBANY\cp932249'
+ALTER ROLE [db_owner] ADD MEMBER [CHSRAdmin]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [Developer]
 GO
